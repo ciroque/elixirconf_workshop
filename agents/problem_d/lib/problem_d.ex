@@ -27,7 +27,13 @@ defmodule ProblemD do
   def handle_info(:get, timeout) do
     resp = HTTPoison.get(@random, [], [recv_timeout: timeout])
     # handle success and failure
-    IO.inspect resp
+
+    wtf = case resp do
+      {:ok, things} -> things
+      {:error, %HTTPoison.Error{id: nil, reason: :timeout}} -> "request timeout"
+    end
+
+    IO.inspect wtf
     {:noreply, timeout}
   end
 end
