@@ -4,12 +4,17 @@ defmodule ProblemE do
   """
   use GenServer
 
+  defp ensure_started() do
+    if GenServer.whereis(__MODULE__) == nil, do: start_link()
+  end
 
   def pop(key) do
+    ensure_started()
     GenServer.call(__MODULE__, {:pop, key})
   end
 
   def incr(key) do
+    ensure_started()
     GenServer.call(__MODULE__, {:incr, key})
   end
 
