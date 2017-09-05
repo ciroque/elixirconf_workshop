@@ -10,7 +10,7 @@ defmodule ProblemC do
   """
 
   def start_link() do
-    GenServer.start_link(__MODULE__, nil)
+    Supervisor.start_link([{Person, :alice}, {Person, :bob}], [strategy: :one_for_one, max_restarts: 487])
   end
 
   def init(_) do
