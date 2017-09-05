@@ -9,7 +9,7 @@ defmodule ProblemB do
   Start an Agent to hold account balance and GenServer that updates it.
   """
   def start_link() do
-    GenServer.start_link(__MODULE__, nil)
+    Supervisor.start_link([State, Server], [strategy: :one_for_one, max_restarts: 487])
   end
 
   @doc false
