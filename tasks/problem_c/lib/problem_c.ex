@@ -6,9 +6,9 @@ defmodule ProblemC do
   def get(timeout) do
     task = Task.async(fn -> slow_request() end)
     # only change below
-    case Task.yield(task, timeout) do
+    case Task.yield(task, timeout) || Task.shutdown(task) do
       nil -> :request_timeout
-      result -> result
+      {:ok, result} -> result
     end
   end
 

@@ -9,7 +9,10 @@ defmodule ProblemD do
   @doc """
   Start a task and await on the result, as `Task.async`.
   """
-  def async(fun)
+  def async(fun) do
+    thing = Task.start_link(__MODULE__)
+
+  end
 
   @doc """
   Await the result of a task, as `Task.await`

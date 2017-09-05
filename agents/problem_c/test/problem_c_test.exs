@@ -26,6 +26,7 @@ defmodule ProblemCTest do
   test "restart new GenServer immediately" do
     {:ok, pid1} = GenServer.start_link(__MODULE__, nil, [name: __MODULE__])
     assert ProblemC.stop(pid1) == :ok
+
     {:ok, pid2} = GenServer.start_link(__MODULE__, nil, [name: __MODULE__])
     refute Process.alive?(pid1)
     assert Process.alive?(pid2)
