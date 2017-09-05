@@ -21,6 +21,11 @@ defmodule ProblemB do
   """
   def stop(pid) do
     # Only change code below
+    ref = Process.monitor(pid)
     send(pid, :stop)
+    receive do
+      { :DOWN, ^ref, _, _, _ } ->
+        :ok
+    end
   end
 end
